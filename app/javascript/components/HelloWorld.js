@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 class HelloWorld extends React.Component {
   render () {
     return (
-      <React.Fragment>
+      <React.Fragment key={1}>
         Greeting: {this.props.greeting}
       </React.Fragment>
     );
