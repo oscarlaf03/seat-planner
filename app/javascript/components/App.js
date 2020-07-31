@@ -12,7 +12,7 @@ class App extends React.Component {
       <Provider store={store}>
         <BrowserRouter>
           <Switch>
-            <Route exact path ="/" render={() => ('Home Alone') }/>
+            <Route exact path ="/" render={() => ('Home Alone 2 the comeback') }/>
             <Route path ="/hello" render={() => <HelloWorld greeting=" My  Dear Friend" />}/>
           </Switch>
         </BrowserRouter>
