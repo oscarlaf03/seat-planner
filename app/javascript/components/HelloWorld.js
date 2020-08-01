@@ -2,6 +2,9 @@ import React from "react"
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect'
 import { List } from "semantic-ui-react";
+import seatsForm from "./seatsForm"
+
+
 const GET_SEATS_REQUEST = 'GET_SEATS_REQUEST';
 const GET_SEATS_SUCCESS = 'GET_SEATS_SUCCESS';
 
@@ -53,6 +56,6 @@ const structuredSelector = createStructuredSelector({
   seats: state => state.seats,
 });
 
-const mapDispatchToProps = {getSeats };
+const mapDispatchToProps = {getSeats};
 
 export default connect(structuredSelector, mapDispatchToProps)(HelloWorld);
