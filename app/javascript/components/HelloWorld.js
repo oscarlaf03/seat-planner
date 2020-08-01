@@ -24,8 +24,6 @@ export function getSeatsSuccess(json){
     json
   }
 }
-
-// import PropTypes from "prop-types"
 class HelloWorld extends React.Component {
   render () {
     const { seats } = this.props;
@@ -58,8 +56,3 @@ const structuredSelector = createStructuredSelector({
 const mapDispatchToProps = {getSeats };
 
 export default connect(structuredSelector, mapDispatchToProps)(HelloWorld);
-
-// HelloWorld.propTypes = {
-//   greeting: PropTypes.string
-// };
-// export default HelloWorld
