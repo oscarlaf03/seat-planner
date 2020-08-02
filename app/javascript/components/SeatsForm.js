@@ -44,7 +44,7 @@ export function getSeatsSuccess(json){
       json
     }
 }
-
+     
 
 
 const renderInput = ({input,meta}) => (
