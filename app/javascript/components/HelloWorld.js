@@ -2,7 +2,7 @@ import React from "react"
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect'
 import { List } from "semantic-ui-react";
-import seatsForm from "./seatsForm"
+import SeatsForm from "./SeatsForm";
 
 
 const GET_SEATS_REQUEST = 'GET_SEATS_REQUEST';
@@ -32,13 +32,16 @@ class HelloWorld extends React.Component {
     const { seats } = this.props;
     const seatsList  = seats.map( (seat) =>{
       return(
-        <List.Item>
-          <List.Icon name='arrow circle right' size ='meidum' verticalAlign='middle' />
-          <List.Content>
-            <List.Header as='a'>{seat.name}</List.Header>
-            <List.Description as='a'>{seat.guid}</List.Description>
-          </List.Content>
-        </List.Item>
+        <div>
+          <List.Item>
+            <List.Icon name='arrow circle right' size ='meidum' verticalAlign='middle' />
+            <List.Content>
+              <List.Header as='a'>{seat.name}</List.Header>
+              <List.Description as='a'>{seat.guid}</List.Description>
+            </List.Content>
+            <SeatsForm />
+          </List.Item>
+        </div>
       );
     });
     return (

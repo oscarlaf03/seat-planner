@@ -1,4 +1,5 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { reducer as formReducer} from 'redux-form';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
@@ -12,7 +13,13 @@ const initialState = {
     ]
 };
 
-function rootReducer(state,action){
+function seatsReducer(state,action){
+    if (!state){
+        state = initialState
+    }
+    console.log('\n\n rootReducer')
+    console.log('\n\n state: \n',state,'\n\n' )
+    console.log('\n\n action: \n',action,'\n\n' )
     console.log(action.type);
     switch(action.type){
         case 'GET_SEATS_SUCCESS':
@@ -20,6 +27,11 @@ function rootReducer(state,action){
     }
     return state;
 }
+
+const rootReducer = combineReducers({
+    seats:seatsReducer,
+    form: formReducer
+});
 
 export default function configureStore(){
     const store = createStore(
