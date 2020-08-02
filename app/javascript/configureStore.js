@@ -15,7 +15,7 @@ const initialState = {
 function rootReducer(state,action){
     console.log(action.type);
     switch(action.type){
-        case 'GET_SEATS_SUCCESS':
+        case 'GET_SEATS_SUCCESS' || 'SEAT_CALCULATED':
             return {seats: action.json.seats}
     }
     return state;

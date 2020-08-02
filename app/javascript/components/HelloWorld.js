@@ -1,7 +1,9 @@
 import React from "react"
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect'
+import { createStructuredSelector } from 'reselect';
 import { List } from "semantic-ui-react";
+import SeatsForm from './SeatsForm';
+
 const GET_SEATS_REQUEST = 'GET_SEATS_REQUEST';
 const GET_SEATS_SUCCESS = 'GET_SEATS_SUCCESS';
 
@@ -29,14 +31,17 @@ class HelloWorld extends React.Component {
     const { seats } = this.props;
     const seatsList  = seats.map( (seat) =>{
       return(
-        <List.Item>
-          <List.Icon name='arrow circle right' size ='meidum' verticalAlign='middle' />
-          <List.Content>
-            <List.Header as='a'>{seat.name}</List.Header>
-            <List.Description as='a'>{seat.guid}</List.Description>
-          </List.Content>
-        </List.Item>
-      );
+        <div>
+          <List.Item>
+            <List.Icon name='arrow circle right' size ='small' verticalAlign='middle' />
+            <List.Content>
+              <List.Header as='a'>{seat.name}</List.Header>
+              <List.Description as='a'>{seat.guid}</List.Description>
+            </List.Content>
+          </List.Item>
+          <SeatsForm />
+        </div>
+     );
     });
     return (
       <React.Fragment key={1}>
