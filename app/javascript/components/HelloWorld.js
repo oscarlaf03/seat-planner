@@ -2,7 +2,7 @@ import React from "react"
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { List } from "semantic-ui-react";
-import SeatsForm from './SeatsForm';
+// import SeatsForm from './SeatsForm';
 
 const GET_SEATS_REQUEST = 'GET_SEATS_REQUEST';
 const GET_SEATS_SUCCESS = 'GET_SEATS_SUCCESS';
@@ -45,7 +45,7 @@ class HelloWorld extends React.Component {
               <List.Description as='a'>{seat.guid}</List.Description>
             </List.Content>
           </List.Item>
-          <SeatsForm />
+          {/* <SeatsForm /> */}
         </div>
      );
     });

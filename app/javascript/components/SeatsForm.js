@@ -4,6 +4,9 @@ import { createStructuredSelector } from 'reselect';
 import {Form,Field} from 'react-final-form';
 import { TextArea } from "semantic-ui-react";
 
+import HelloWorld from './HelloWorld';
+
+
 const SEAT_CALCULATED = 'SEAT_CALCULATED'
 
 
@@ -12,7 +15,6 @@ const options = {
     headers:{'Content-Type': 'application/json'},
     body: JSON.stringify({seats:'teste'})
   }
-  
 
 function calculateSeats(seatData){
   console.log(' calculateSeats() Action!!');
@@ -33,6 +35,25 @@ function calculateSeats(seatData){
   }
 }
 
+function postSeat(values,callback){
+    console.log('postseats function')
+    const  request =  fetch('v1/seats.json',{
+        method: 'POST',
+        headers:{'Content-Type': 'application/json','Accept':'application/json'},
+        body: JSON.stringify(values)
+    }).then( response => {
+        let r = response.json();
+        console.log(r);
+        return r;
+    }).then(response => {
+        console.log('\n\n loggin response \n\n',response);
+    }).then(callback);
+    return{
+        type:'GET_SEATS_REQUEST',
+        paylaod:  request
+    };
+}
+
 
 export function getSeatsSuccess(json){
     console.log("getSeatsSuccess at SeatsForm")
@@ -40,7 +61,22 @@ export function getSeatsSuccess(json){
       type: 'GET_SEATS_SUCCESS',
       json
     }
-  }
+}
+
+const thunkPostSeats = (values) => {
+    return (dispatch) => {
+        fetch('v1/seats.json',{
+            method: 'POST',
+            headers:{'Content-Type': 'application/json','Accept':'application/json'},
+            body: JSON.stringify(values)
+        }).then( r=> r.json()).then( resp => {
+            dispatch({
+                type:'GET_SEATS_SUCCESS',
+                payload: resp
+            })
+        }).catch((error)=> console.error(error.stack));
+    }
+}
 
 
 const renderInput = ({input,meta}) => (
@@ -50,7 +86,11 @@ const renderInput = ({input,meta}) => (
 const onSubmit = values => {
     // alert(JSON.stringify(values));
     // console.log('\n\n loggin values form onSubmit SeatsForm \n\n', JSON.parse(values.data),'\n\n')
-    return calculateSeats(values);
+    // return calculateSeats(values);
+    postSeat(values, (seats) => {
+        console.log("\n\n loggin at callback", seats);
+    });
+    // thunkPostSeats(values);
 
 
 }
@@ -60,18 +100,21 @@ const onSubmit = values => {
 class SeatsForm extends React.Component {
     render(){
         return(
-            <Form
-                onSubmit={onSubmit}
-                render ={ ({handleSubmit}) =>(
-                    <form  onSubmit={handleSubmit} className='ui form'>
-                        <Field
-                        name='seats'
-                        component= {renderInput}
-                        />
-                        <button type='submit'>Submit </button>
-                    </form>
-                )}
-            />
+            <div>
+                <Form
+                    onSubmit={onSubmit}
+                    render ={ ({handleSubmit}) =>(
+                        <form  onSubmit={handleSubmit} className='ui form'>
+                            <Field
+                            name='seats'
+                            component= {renderInput}
+                            />
+                            <button type='submit'>Submit </button>
+                        </form>
+                    )}
+                />
+                <HelloWorld />
+            </div>
         );
     }
 }
