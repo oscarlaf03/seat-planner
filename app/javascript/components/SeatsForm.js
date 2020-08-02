@@ -15,7 +15,10 @@ function calculateSeats(seatData){
           headers:{'Content-Type': 'application/json'},
           body: JSON.stringify(seatData)
       })
-        .then(response => response.json())
+        .then(response => {
+          console.log('\n this is response on calculateSeats')
+          response.json();
+        })
         .then(json => dispatch(getSeatsSuccess(json)))
         .catch(error => console.error(error.stack))
   }
