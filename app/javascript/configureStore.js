@@ -4,12 +4,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 
 const initialState = {
-    seats: [
-        {
-            name:'My first test seat',
-            guid: '123'
-        }
-    ]
+    seats: [],
+    lastAddedSeat: null
 };
 
 function rootReducer(state,action){
@@ -19,6 +15,12 @@ function rootReducer(state,action){
             return {seats: action.json.seats}
         case 'SEAT_CALCULATED':
             console.log('rootReducer SEAT_CALCULATED')
+            case "SEAT_ADDED":
+                const seats = state.seats
+
+                state.seats = JSON.parse(JSON.stringify(  [action.seat, ...seats]))
+                state.lastAddedSeat = action.seat
+                 return {...state}
     }
     return state;
 }

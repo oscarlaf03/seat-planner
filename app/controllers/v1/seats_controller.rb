@@ -28,8 +28,8 @@ class V1::SeatsController < ApplicationController
         puts  params
         render json: {:seats => [
             {
-                :name => 'some-seat-calculated',
-                :guid=> "calculated seat #{params['seats']}"
+                :name => 'some-seat-calculated  ' + params['seats'],
+                :guid=> SecureRandom.uuid
             }
         ]}.to_json
     end
