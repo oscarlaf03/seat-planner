@@ -7,13 +7,19 @@ import SeatsForm from './SeatsForm';
 const GET_SEATS_REQUEST = 'GET_SEATS_REQUEST';
 const GET_SEATS_SUCCESS = 'GET_SEATS_SUCCESS';
 
+const options = {
+  method:'POST',
+  headers:{'Content-Type': 'application/json'},
+  body: JSON.stringify({seats:'teste'})
+}
+
 function getSeats() {
   console.log(' getSeats() Action!!');
   return dispatch => {
     dispatch({
     type: GET_SEATS_REQUEST
     });
-    return fetch('v1/seats.json')
+    return fetch('v1/seats.json',options)
       .then(response => response.json())
       .then(json => dispatch(getSeatsSuccess(json)))
       .catch(error => console.error(error.stack))

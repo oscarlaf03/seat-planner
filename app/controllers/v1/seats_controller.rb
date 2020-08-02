@@ -1,4 +1,7 @@
 class V1::SeatsController < ApplicationController
+    before_action :accept_all_params
+    skip_before_action :verify_authenticity_token
+
     def index
         puts '\n\n here is seats#index'
         render json: {:seats => [
@@ -21,12 +24,12 @@ class V1::SeatsController < ApplicationController
     end
 
     def calculate
-        puts 'hello me'
-        puts seats_params
+        puts 'hello me \n\n putting params.seats:'
+        puts  params
         render json: {:seats => [
             {
                 :name => 'some-seat-calculated',
-                :guid=> 'guid of a calculated seat'
+                :guid=> "calculated seat #{params['seats']}"
             }
         ]}.to_json
     end
@@ -34,8 +37,8 @@ class V1::SeatsController < ApplicationController
 
     private
 
-    def seats_params
-        params.require(:seats).permit(:data)
+    def accept_all_params
+        params.permit!
     end
 
 
