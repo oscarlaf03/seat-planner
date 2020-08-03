@@ -3,16 +3,6 @@ class V1::SeatsController < ApplicationController
     before_action :accept_all_params
     skip_before_action :verify_authenticity_token
 
-    def index
-        puts '\n\n here is seats#index'
-        render json: {:seats => [
-            {
-                :name => 'some-seat',
-                :guid=> '01415674d-a0e8-4748-a5f53a05c453'
-            }
-        ]}.to_json
-    end
-
     def calculate
         render json: find_seat.to_json
     end
