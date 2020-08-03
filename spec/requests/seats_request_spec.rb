@@ -22,11 +22,18 @@ RSpec.describe "Testing response behaviour", type: :request do
         expect(body['errors']).to be_nil
     end
 
-    # it 'No seats and no erros when data is clean but all seats are taken' do
-    #     post '/v1/seats', params: {seats:ALL_SEATS_ARE_TAKEN.to_json}
-    #     body = JSON.parse(response.body)
-    #     expect(body['seats']).to be_nil
-    #     expect(body['errors'][0]).to be_nil
-    # end
+    it 'No seats and no errors when data is clean but all seats are taken' do
+        post '/v1/seats', params: {seats:ALL_SEATS_ARE_TAKEN.to_json}
+        body = JSON.parse(response.body)
+        expect(body['seats']).to be == [nil]
+        expect(body['errors']).to be == nil
+    end
+
+    it 'The best available seat is actually found' do
+        post '/v1/seats', params: {seats:BEST_SEAT_IS_H7.to_json}
+        body = JSON.parse(response.body)
+        expect(body['seats'].first['id']).to be == 'h7'
+    end
+
 
 end

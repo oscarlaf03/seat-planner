@@ -14,11 +14,6 @@ class V1::SeatsController < ApplicationController
     end
 
     def calculate
-        puts 'putting  finded seat'
-        puts find_seat
-        # render json: {:seats => [
-        #    find_seat.to_json
-        # ]}
         render json: find_seat.to_json
     end
 
@@ -44,7 +39,7 @@ class V1::SeatsController < ApplicationController
         rescue
             {
                 seats: nil,
-                errors:  "Invalid ata: \" #{params['seats']}\" does not follow the data object format"
+                errors:  "Invalid data: \" #{params['seats']}\" does not follow the data object format"
             }
         end
     end
