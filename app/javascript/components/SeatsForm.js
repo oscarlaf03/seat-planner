@@ -28,7 +28,7 @@ class SeatsForm extends React.Component {
 
     render(){
         return(
-            <div>
+            <div style={{margin:'5px'}}>
                 <Form
                     onSubmit={this.onSubmit.bind(this)}
                     render ={ ({handleSubmit}) =>(

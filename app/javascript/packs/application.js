@@ -4,8 +4,6 @@
 // that code so it'll be compiled.
 
 import 'semantic-ui-css/semantic.min.css';
-require("@rails/ujs").start()
-require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 

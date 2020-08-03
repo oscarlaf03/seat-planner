@@ -12,8 +12,10 @@ class App extends React.Component {
       <Provider store={store}>
         <BrowserRouter>
           <Switch>
-            <div className='ui text  center aligned container'>
-              <Route exact path ="/" render={() => <SeatsForm/> }/>
+            <div className='ui text  center aligned container' style={{height:'200px'}}>
+              <div style={{margin:'0',position:"absolute",top:'15%'}}>
+                <Route exact path ="/" render={() => <SeatsForm /> }/>
+              </div>
             </div>
           </Switch>
         </BrowserRouter>

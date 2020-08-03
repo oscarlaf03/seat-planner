@@ -1,4 +1,5 @@
 class V1::SeatsController < ApplicationController
+    require 'json'
     before_action :accept_all_params
     skip_before_action :verify_authenticity_token
 
@@ -12,28 +13,12 @@ class V1::SeatsController < ApplicationController
         ]}.to_json
     end
 
-
-    def create
-        puts seats_params
-        render json: {:seats => [
-            {
-                :name => 'some-seat-created',
-                :guid=> 'guid of a created seat'
-            }
-        ]}.to_json
-    end
-
     def calculate
         puts 'hello me \n\n putting params.seats:'
-        puts  params
         render json: {:seats => [
-            {
-                :name => 'some-seat-calculated  ' + params['seats'],
-                :guid=> SecureRandom.uuid
-            }
+           find_seat.to_json
         ]}.to_json
     end
-
 
     private
 
@@ -41,5 +26,17 @@ class V1::SeatsController < ApplicationController
         params.permit!
     end
 
+    def find_seat
+        data = JSON.parse(params['seats'].strip)
+        rows =  ('a'..'z').to_a[0..data['venue']['layout']['rows']]
+        columns =  (1..data['venue']['layout']['columns']).to_a
+        best_seat = [0,columns[columns.length/2]]
+        seats = data['seats'].map{ |s| data['seats'][s[0]]}.select{ |s| s['status']== 'AVAILABLE'}
+        seats.each{ |s| s['distance'] = getEuclidianDistance([rows.index(s['row']),s['column']],best_seat)}
+        min_seat = seats.min_by { |s| s['distance'] }
+    end
 
+    def getEuclidianDistance(a,b)
+       Math.sqrt((( a[0]-b[0])**2) + (( a[1]-b[1])**2))
+    end
 end

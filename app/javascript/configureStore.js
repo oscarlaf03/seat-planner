@@ -8,7 +8,6 @@ const initialState = {
 };
 
 function rootReducer(state,action){
-    console.log('\n\n loggin action.type on rootReducer: ',action.type,'\n');
     switch(action.type){
         case "SEAT_ADDED":
             const seats = state.seats

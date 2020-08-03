@@ -2,10 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 class SeatsList extends React.Component{
     render(){
-       return  <div>
+       return  (
+       <div style={{margin:'20px'}}>
             <h2>SeatsList</h2>
-            {JSON.stringify(this.props.seat)}
+            { this.props.seat && JSON.stringify(this.props.seat)}
         </div>
+       )
     }
 }
 
