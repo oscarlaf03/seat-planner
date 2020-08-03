@@ -1,22 +1,32 @@
 require 'rails_helper'
 require_relative 'example_data'
 
-RSpec.describe "Seats", type: :request do
+RSpec.describe "Testing response behaviour", type: :request do
 
-    before do
+    it 'Seats is nil when invalid data is given' do
         post '/v1/seats', params: {seats:'invalid data'}
+        body = JSON.parse(response.body)
+        expect(body['seats']).to be_nil
     end
 
-    it 'Seats is nil with invalid data' do
-        puts 'putting example data'
-        puts EXAMPLE_DATA
-        data = JSON.parse(JSON.parse(response.body)['seats'][0])['seats']
-        expect(data).to be(nil)
+    it 'Errors is filled  when invalid data is given' do
+        post '/v1/seats', params: {seats:'invalid data'}
+        body = JSON.parse(response.body)
+        expect(body['errors']).to be_truthy
     end
 
-    it 'Errors is filled with invalid data' do
-        errors = JSON.parse(JSON.parse(response.body)['seats'][0])['errors']
-        expect(errors).to be_truthy
+    it 'A "best seat" is found when one is available and data is valid' do
+        post '/v1/seats', params: {seats:BEST_SEAT_IS_H7.to_json}
+        body = JSON.parse(response.body)
+        expect(body['seats']).to be_truthy
+        expect(body['errors']).to be_nil
     end
+
+    # it 'No seats and no erros when data is clean but all seats are taken' do
+    #     post '/v1/seats', params: {seats:ALL_SEATS_ARE_TAKEN.to_json}
+    #     body = JSON.parse(response.body)
+    #     expect(body['seats']).to be_nil
+    #     expect(body['errors'][0]).to be_nil
+    # end
 
 end

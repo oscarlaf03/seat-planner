@@ -16,9 +16,10 @@ class V1::SeatsController < ApplicationController
     def calculate
         puts 'putting  finded seat'
         puts find_seat
-        render json: {:seats => [
-           find_seat.to_json
-        ]}
+        # render json: {:seats => [
+        #    find_seat.to_json
+        # ]}
+        render json: find_seat.to_json
     end
 
     private

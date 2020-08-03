@@ -14,10 +14,10 @@ function rootReducer(state,action){
             console.log('\n\n loggin state.seats\n\n',state.seats,'\n\n');
             console.log('\n\n loggin action.seat\n\n',action.seat,'\n\n');
             // const seats = state.seats
-            state.seats =   [action.seat, ...state.seats];
-            // state.seats = action.seat.seats
-            // state.errors = action.seat.errors
+            // state.seats = [action.seat, ...state.seats];
+            state.seats = action.seat.seats
             state.errors = action.seat.errors
+            // state.errors = action.seat.errors
             state.lastAddedSeat = action.seat
                 return {...state}
     }

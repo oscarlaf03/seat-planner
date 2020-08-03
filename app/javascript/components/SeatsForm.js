@@ -18,7 +18,9 @@ class SeatsForm extends React.Component {
             body: JSON.stringify(values)
         }).then( response => {
             response.json().then((r)=>{
-                this.props.seatAdded(r.seats[0])
+                console.log('\n\nlogging response of postSeat\n\n', r, '\n\n');
+                // this.props.seatAdded(r.seats[0])
+                this.props.seatAdded(r)
             })
         })
     }
