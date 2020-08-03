@@ -14,7 +14,8 @@ class V1::SeatsController < ApplicationController
     end
 
     def calculate
-        puts 'hello me \n\n putting params.seats:'
+        puts 'putting  finded seat'
+        puts find_seat
         render json: {:seats => [
            find_seat.to_json
         ]}.to_json
@@ -27,13 +28,25 @@ class V1::SeatsController < ApplicationController
     end
 
     def find_seat
-        data = JSON.parse(params['seats'].strip)
-        rows =  ('a'..'z').to_a[0..data['venue']['layout']['rows']]
-        columns =  (1..data['venue']['layout']['columns']).to_a
-        best_seat = [0,columns[columns.length/2]]
-        seats = data['seats'].map{ |s| data['seats'][s[0]]}.select{ |s| s['status']== 'AVAILABLE'}
-        seats.each{ |s| s['distance'] = getEuclidianDistance([rows.index(s['row']),s['column']],best_seat)}
-        min_seat = seats.min_by { |s| s['distance'] }
+        begin
+            data = JSON.parse(params['seats'].strip)
+            rows =  ('a'..'z').to_a[0..data['venue']['layout']['rows']]
+            columns =  (1..data['venue']['layout']['columns']).to_a
+            best_seat = [0,columns[columns.length/2]]
+            seats = data['seats'].map{ |s| data['seats'][s[0]]}.select{ |s| s['status']== 'AVAILABLE'}
+            seats.each{ |s| s['distance'] = getEuclidianDistance([rows.index(s['row']),s['column']],best_seat)}
+            {
+                seats: [min_seat = seats.min_by { |s| s['distance'] }],
+                errors: nil
+            }
+
+        rescue
+
+            {
+                seats: nil,
+                errors:  "Invalid ata: \" #{params['seats']}\" does not follow the data object format"
+            }
+        end
     end
 
     def getEuclidianDistance(a,b)
