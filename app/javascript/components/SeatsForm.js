@@ -1,11 +1,12 @@
-import React from "react"
+import React from "react";
 import { connect } from 'react-redux';
 import {Form,Field} from 'react-final-form';
-import { TextArea } from "semantic-ui-react";
+import { TextArea, Segment, Button } from "semantic-ui-react";
 import SeatsList from "./SeatsList";
+import Explanation from "./Explanation";
 
 const renderInput = ({input,meta}) => (
-    <TextArea {...input} type ='textarea'  />
+    <TextArea  style={{minHeight:'120px'}} {...input} type ='textarea'  />
 );
 class SeatsForm extends React.Component {
     constructor(){
@@ -30,19 +31,22 @@ class SeatsForm extends React.Component {
 
     render(){
         return(
-            <div style={{margin:'5px'}}>
-                <Form
-                    onSubmit={this.onSubmit.bind(this)}
-                    render ={ ({handleSubmit}) =>(
-                        <form  onSubmit={handleSubmit} className='ui form'>
-                            <Field
-                            name='seats'
-                            component= {renderInput}
-                            />
-                            <button type='submit'>Submit </button>
-                        </form>
-                    )}
-                />
+            <div style={{paddingTop:'10%'}}>
+                <Explanation />
+                <Segment raised>
+                    <Form
+                        onSubmit={this.onSubmit.bind(this)}
+                        render ={ ({handleSubmit}) =>(
+                            <form  onSubmit={handleSubmit} className='ui form'>
+                                <Field
+                                name='seats'
+                                component= {renderInput}
+                                />
+                                <Button primary style={{margin:'20px'}} type='submit'>Find your best seat </Button>
+                            </form>
+                        )}
+                    />
+                </Segment>
                 <SeatsList />
             </div>
         );

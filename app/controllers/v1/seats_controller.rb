@@ -28,7 +28,7 @@ class V1::SeatsController < ApplicationController
 
         rescue
             {
-                seats: nil,
+                seats: [nil],
                 errors:  "Invalid data: \" #{params['seats']}\" does not follow the data object format"
             }
         end

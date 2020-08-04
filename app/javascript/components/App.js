@@ -3,6 +3,7 @@ import React from "react"
 import { BrowserRouter, Switch, Route } from "react-router-dom"
 import { Provider } from 'react-redux'
 import configureStore from '../configureStore'
+import { Container } from 'semantic-ui-react'
 const store = configureStore();
 
 import SeatsForm from "./SeatsForm";
@@ -12,11 +13,9 @@ class App extends React.Component {
       <Provider store={store}>
         <BrowserRouter>
           <Switch>
-            <div className='ui text  center aligned container' style={{height:'200px'}}>
-              <div style={{margin:'0',position:"absolute",top:'15%'}}>
+            <Container textAlign='center'>
                 <Route exact path ="/" render={() => <SeatsForm /> }/>
-              </div>
-            </div>
+            </Container>
           </Switch>
         </BrowserRouter>
       </Provider>

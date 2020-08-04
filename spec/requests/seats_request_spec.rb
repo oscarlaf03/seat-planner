@@ -6,7 +6,7 @@ RSpec.describe "Testing response behaviour", type: :request do
     it 'Seats is nil when invalid data is given' do
         post '/v1/seats', params: {seats:'invalid data'}
         body = JSON.parse(response.body)
-        expect(body['seats']).to be_nil
+        expect(body['seats']).to be == [nil]
     end
 
     it 'Errors is filled  when invalid data is given' do
