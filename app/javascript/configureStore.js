@@ -5,7 +5,6 @@ import { composeWithDevTools } from "redux-devtools-extension";
 const initialState = {
   seats: [],
   errors: null,
-  lastAddedSeat: null,
 };
 
 function rootReducer(state, action) {
