@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Form, Field } from "react-final-form";
 import { TextArea, Segment, Button } from "semantic-ui-react";
 import SeatsList from "./SeatsList";
-import Explanation from "./Explanation";
 
 const renderInput = ({ input, meta }) => (
   <TextArea style={{ minHeight: "120px" }} {...input} type="textarea" />
@@ -32,8 +31,7 @@ class SeatsForm extends React.Component {
 
   render() {
     return (
-      <div style={{ paddingTop: "10%" }}>
-        <Explanation />
+      <div>
         <Segment raised>
           <Form
             onSubmit={this.onSubmit.bind(this)}

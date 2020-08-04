@@ -27,7 +27,7 @@ const formatExample = {
 class Explanation extends React.Component {
   render() {
     return (
-      <div>
+      <div >
         <Header as="h2">Best available seat</Header>
         <p>or</p>
         <Header as="h3">Where would Euclid seat?</Header>
