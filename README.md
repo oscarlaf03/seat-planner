@@ -20,7 +20,7 @@ Our app takes a user input then send is to the back-end for computation, returns
 #### Specs and instructions
 
 * input specs
-    the input on the textarea field most be text describing an object of the following attributes and structure. seats with an "status" other than "Available" are ignored from calculation, only seats explicitly declared in the object are considered for calculation.
+    * the input on the textarea field most be text describing an object of the following attributes and structure. seats with an "status" other than "Available" are ignored from calculation, only seats explicitly declared in the object are considered for calculation.
     ```javascript
     {
         "venue": {
@@ -42,9 +42,9 @@ Our app takes a user input then send is to the back-end for computation, returns
     ```
 
 
-* Ruby and Roils versions
-    ruby 2.6.6
-    rails 6
+* Ruby and Rails versions:
+    * ruby 2.6.6
+    * rails 6
 
 * System dependencies:
     * Yarn
@@ -63,12 +63,12 @@ Our app takes a user input then send is to the back-end for computation, returns
     2. `yarn install`
     3. `rails s -p 3000`
 
-* Database creation
-    SQLite is included but not used at all
+* Database creation:
+    * SQLite is included but not used at all
 
 
-* How to run the test suite
-    Rspec is used for unit testing, run form the project folder:
+* How to run the test suite:
+    * Rspec is used for unit testing, run form the project folder:
     ```
     rspec spec/requests/seats_request_spec.rb
     ```
